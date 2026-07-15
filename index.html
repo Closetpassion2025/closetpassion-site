@@ -182,6 +182,15 @@
     font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:800;
     letter-spacing:-.015em;line-height:1.15;margin-bottom:1rem;
   }
+  .product-title{
+    display:flex;align-items:center;gap:1rem;margin-bottom:1rem;
+  }
+  .product-title h2{margin-bottom:0}
+  .product-logo{
+    width:64px;height:64px;border-radius:16px;flex:0 0 64px;
+    box-shadow:0 8px 24px rgba(0,0,0,.4),0 0 0 1px var(--line);
+  }
+  @media(max-width:640px){.product-logo{width:52px;height:52px;flex-basis:52px;border-radius:13px}}
   section.product .lead{color:var(--muted);max-width:50ch}
   .feature-list{list-style:none;margin-top:1.75rem;display:grid;gap:.85rem}
   .feature-list li{
@@ -243,6 +252,14 @@
     font-family:var(--mono);font-size:.68rem;letter-spacing:.3em;
     text-transform:uppercase;color:var(--st-3);margin-bottom:1.2rem;display:block;
   }
+  .noir-title{display:flex;align-items:center;gap:1.1rem;margin-bottom:1rem}
+  .noir-title h2{margin-bottom:0}
+  .noir-logo{
+    width:72px;height:72px;flex:0 0 72px;
+    border-radius:18px;object-fit:cover;
+    box-shadow:0 10px 24px rgba(0,0,0,.55),0 0 0 1px rgba(245,158,11,.25);
+  }
+  @media(max-width:640px){.noir-logo{width:56px;height:56px;flex-basis:56px;border-radius:14px}}
   .noir h2{
     font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.015em;
     line-height:1.12;margin-bottom:1rem;
@@ -349,7 +366,10 @@
     <div class="product-grid">
       <div>
         <span class="eyebrow">Fonsar Tech</span>
-        <h2>Fonsar Browser</h2>
+        <div class="product-title">
+          <img class="product-logo" src="assets/fonsar-browser-logo.png" alt="Logo do Fonsar Browser" width="64" height="64">
+          <h2>Fonsar Browser</h2>
+        </div>
         <p class="lead pt">Um browser Android leve e focado em privacidade, de código aberto (MPL-2.0). Navegação sem rasto, sem distrações e sob o teu controlo.</p>
         <p class="lead en">A lightweight, privacy-focused Android browser, open source under MPL-2.0. Browsing with no tracking, no clutter, and fully under your control.</p>
         <ul class="feature-list">
@@ -360,7 +380,8 @@
         </ul>
         <div class="btn-row">
           <a class="btn btn-primary" href="https://github.com/Closetpassion2025/fonsar-browser" rel="noopener">GitHub</a>
-          <a class="btn btn-ghost" href="https://closetpassion2025.github.io/fonsar-browser/privacy-policy"><span class="pt">Política de privacidade</span><span class="en">Privacy policy</span></a>
+          <!-- TODO: substituir pelo URL real da política de privacidade no GitHub Pages -->
+          <a class="btn btn-ghost" href="#"><span class="pt">Política de privacidade</span><span class="en">Privacy policy</span></a>
           <span class="badge"><span class="pt">Google Play — em breve</span><span class="en">Google Play — coming soon</span></span>
         </div>
       </div>
@@ -384,8 +405,13 @@
   <section class="product" id="betweenus">
     <div class="noir">
       <span class="case-label"><span class="pt">Dossier Fonsar Studio · Caso n.º 001</span><span class="en">Fonsar Studio file · Case no. 001</span></span>
-      <h2 class="pt">Between Us: <em>Detective Story</em> está a chegar.</h2>
-      <h2 class="en">Between Us: <em>Detective Story</em> is coming.</h2>
+      <div class="noir-title">
+        <img class="noir-logo" src="assets/betweenus-icon.png" alt="Ícone do jogo Between Us: Detective Story" width="72" height="72">
+        <div>
+          <h2 class="pt">Between Us: <em>Detective Story</em> está a chegar.</h2>
+          <h2 class="en">Between Us: <em>Detective Story</em> is coming.</h2>
+        </div>
+      </div>
       <p class="pt">Um mistério noir interativo onde cada escolha aproxima — ou afasta — Max da verdade. O caso reabre <span class="redacted">brevemente</span> sob a chancela Fonsar Studio.</p>
       <p class="en">An interactive noir mystery where every choice brings Max closer to the truth — or further from it. The case reopens <span class="redacted">soon</span> under the Fonsar Studio label.</p>
       <span class="soon-badge"><span class="pulse" aria-hidden="true"></span><span class="pt">Brevemente</span><span class="en">Coming soon</span></span>
