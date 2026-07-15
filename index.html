@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Closetpassion S.A. — Fonsar Studio &amp; Fonsar Tech</title>
+<meta name="description" content="Closetpassion S.A. — estúdio português de jogos, media e software. Casa do Fonsar Browser e do jogo Between Us: Detective Story.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0b0b12;
+    --ink-2:#12121d;
+    --paper:#f2f0ec;
+    --muted:#9a97a8;
+    --line:rgba(242,240,236,.10);
+
+    /* Fonsar Studio — purple / fuchsia / amber */
+    --st-1:#8b5cf6; --st-2:#d946ef; --st-3:#f59e0b;
+    /* Fonsar Tech — teal / mint (cores da mascote) */
+    --tc-1:#0d9488; --tc-2:#14b8a6; --tc-3:#6ee7c7;
+
+    --display:'Plus Jakarta Sans',system-ui,sans-serif;
+    --mono:'Space Mono',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--display);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  ::selection{background:var(--st-2);color:var(--ink)}
+  a{color:inherit}
+  img{max-width:100%}
+
+  /* ---------- language toggle ---------- */
+  .en{display:none}
+  body.lang-en .en{display:revert}
+  body.lang-en .pt{display:none}
+  span.en, span.pt{display:none}
+  body:not(.lang-en) span.pt{display:inline}
+  body.lang-en span.en{display:inline}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    display:flex;align-items:center;justify-content:space-between;
+    padding:1rem clamp(1.25rem,4vw,3rem);
+    background:rgba(11,11,18,.82);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .wordmark{
+    font-family:var(--mono);font-weight:700;font-size:.95rem;
+    letter-spacing:.22em;text-transform:uppercase;text-decoration:none;
+  }
+  .wordmark b{
+    background:linear-gradient(90deg,var(--st-1),var(--st-2) 40%,var(--tc-2) 70%,var(--tc-3));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  nav{display:flex;align-items:center;gap:1.5rem;font-size:.85rem}
+  nav a{text-decoration:none;color:var(--muted);transition:color .2s}
+  nav a:hover,nav a:focus-visible{color:var(--paper)}
+  nav a:focus-visible,button:focus-visible,.btn:focus-visible{
+    outline:2px solid var(--tc-3);outline-offset:3px;border-radius:2px;
+  }
+  .lang-switch{
+    font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;
+    border:1px solid var(--line);border-radius:999px;
+    background:transparent;color:var(--paper);
+    padding:.35rem .9rem;cursor:pointer;transition:border-color .2s;
+  }
+  .lang-switch:hover{border-color:var(--muted)}
+  .nav-links{display:flex;gap:1.5rem}
+  @media(max-width:640px){.nav-links{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    padding:clamp(5rem,12vh,9rem) clamp(1.25rem,4vw,3rem) clamp(4rem,10vh,7rem);
+    max-width:1100px;margin:0 auto;
+  }
+  .eyebrow{
+    font-family:var(--mono);font-size:.72rem;letter-spacing:.28em;
+    text-transform:uppercase;color:var(--muted);
+    display:block;margin-bottom:1.4rem;
+  }
+  .hero h1{
+    font-size:clamp(2.2rem,6vw,4.2rem);
+    font-weight:800;line-height:1.08;letter-spacing:-.02em;
+    max-width:18ch;
+  }
+  .hero h1 .g-st{
+    background:linear-gradient(90deg,var(--st-1),var(--st-2),var(--st-3));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero h1 .g-tc{
+    background:linear-gradient(90deg,var(--tc-1),var(--tc-2),var(--tc-3));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{margin-top:1.6rem;max-width:52ch;color:var(--muted);font-size:1.05rem}
+  .hero-grid{
+    display:grid;grid-template-columns:1.15fr .85fr;gap:3rem;align-items:center;
+    position:relative;z-index:1;
+  }
+  @media(max-width:820px){.hero-grid{grid-template-columns:1fr;gap:2.5rem}}
+  .mascot-panel{
+    background:linear-gradient(160deg,#ffffff 55%,#dff7ef);
+    border-radius:24px;overflow:hidden;
+    box-shadow:0 30px 80px rgba(20,184,166,.18),0 0 0 1px var(--line);
+    max-width:340px;justify-self:center;
+  }
+  .mascot-panel video,.mascot-panel img{
+    display:block;width:100%;height:auto;
+  }
+  .mascot-caption{
+    font-family:var(--mono);font-size:.65rem;letter-spacing:.24em;
+    text-transform:uppercase;color:#0d9488;
+    text-align:center;padding:.7rem 1rem .9rem;
+    background:#ffffff;
+  }
+
+  /* signature: the dual thread */
+  .thread{
+    position:absolute;inset:auto 0 0 0;height:3px;pointer-events:none;
+    background:linear-gradient(90deg,var(--st-1),var(--st-2) 35%,transparent 50%,var(--tc-1) 65%,var(--tc-3));
+    opacity:.9;
+  }
+  .hero::before{
+    content:"";position:absolute;top:-40%;right:-15%;width:60vw;height:60vw;
+    max-width:700px;max-height:700px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle at center,rgba(139,92,246,.14),transparent 60%);
+  }
+  .hero::after{
+    content:"";position:absolute;bottom:-45%;left:-10%;width:55vw;height:55vw;
+    max-width:640px;max-height:640px;border-radius:50%;pointer-events:none;
+    background:radial-gradient(circle at center,rgba(14,165,233,.12),transparent 60%);
+  }
+
+  /* ---------- brands ---------- */
+  .brands{
+    max-width:1100px;margin:0 auto;
+    padding:clamp(3rem,8vh,5rem) clamp(1.25rem,4vw,3rem);
+    display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;
+  }
+  @media(max-width:760px){.brands{grid-template-columns:1fr}}
+  .brand-card{
+    border:1px solid var(--line);border-radius:16px;
+    padding:2rem;background:var(--ink-2);
+    position:relative;overflow:hidden;
+  }
+  .brand-card::before{
+    content:"";position:absolute;inset:0 0 auto 0;height:3px;
+  }
+  .brand-card.studio::before{background:linear-gradient(90deg,var(--st-1),var(--st-2),var(--st-3))}
+  .brand-card.tech::before{background:linear-gradient(90deg,var(--tc-1),var(--tc-2),var(--tc-3))}
+  .brand-card h2{font-size:1.35rem;font-weight:700;margin-bottom:.5rem}
+  .brand-card.tech h2{font-family:var(--mono);letter-spacing:.04em}
+  .brand-card.tech h2::after{
+    content:"_";color:var(--tc-3);animation:blink 1.1s steps(1) infinite;
+  }
+  @keyframes blink{50%{opacity:0}}
+  .brand-card p{color:var(--muted);font-size:.95rem}
+  .brand-tag{
+    font-family:var(--mono);font-size:.68rem;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--muted);display:block;margin-bottom:1rem;
+  }
+
+  /* ---------- product sections ---------- */
+  section.product{
+    max-width:1100px;margin:0 auto;
+    padding:clamp(3.5rem,9vh,6rem) clamp(1.25rem,4vw,3rem);
+    border-top:1px solid var(--line);
+  }
+  .product-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center}
+  @media(max-width:820px){.product-grid{grid-template-columns:1fr;gap:2rem}}
+  section.product h2{
+    font-size:clamp(1.7rem,3.6vw,2.5rem);font-weight:800;
+    letter-spacing:-.015em;line-height:1.15;margin-bottom:1rem;
+  }
+  section.product .lead{color:var(--muted);max-width:50ch}
+  .feature-list{list-style:none;margin-top:1.75rem;display:grid;gap:.85rem}
+  .feature-list li{
+    display:flex;gap:.75rem;align-items:flex-start;font-size:.95rem;color:var(--paper);
+  }
+  .feature-list li::before{
+    content:"";flex:0 0 8px;height:8px;margin-top:.45rem;border-radius:2px;
+    background:linear-gradient(135deg,var(--tc-2),var(--tc-3));
+  }
+  .btn-row{display:flex;flex-wrap:wrap;gap:.9rem;margin-top:2rem}
+  .btn{
+    display:inline-flex;align-items:center;gap:.5rem;
+    font-weight:600;font-size:.9rem;text-decoration:none;
+    padding:.7rem 1.35rem;border-radius:10px;transition:transform .15s,opacity .2s;
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn-primary{background:linear-gradient(90deg,var(--tc-1),var(--tc-2));color:#fff}
+  .btn-ghost{border:1px solid var(--line);color:var(--paper)}
+  .badge{
+    font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+    border:1px solid var(--line);border-radius:999px;padding:.3rem .8rem;color:var(--muted);
+  }
+
+  /* fonsar mock */
+  .browser-mock{
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    background:var(--ink-2);box-shadow:0 24px 60px rgba(0,0,0,.45);
+  }
+  .browser-bar{
+    display:flex;align-items:center;gap:.6rem;
+    padding:.7rem .9rem;border-bottom:1px solid var(--line);
+  }
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--line)}
+  .urlbar{
+    flex:1;font-family:var(--mono);font-size:.72rem;color:var(--muted);
+    border:1px solid var(--line);border-radius:8px;padding:.35rem .7rem;
+    display:flex;align-items:center;gap:.5rem;
+  }
+  .lock{color:var(--tc-3)}
+  .browser-body{padding:1.5rem;display:grid;gap:.8rem}
+  .skeleton{height:10px;border-radius:6px;background:rgba(242,240,236,.07)}
+  .skeleton.w60{width:60%}.skeleton.w80{width:80%}.skeleton.w40{width:40%}
+  .shield-row{
+    display:flex;align-items:center;gap:.6rem;margin-top:.5rem;
+    font-family:var(--mono);font-size:.7rem;color:var(--tc-3);letter-spacing:.08em;
+  }
+
+  /* between us — noir teaser */
+  .noir{
+    background:
+      radial-gradient(ellipse at 20% 0%,rgba(245,158,11,.10),transparent 55%),
+      radial-gradient(ellipse at 90% 100%,rgba(217,70,239,.08),transparent 55%),
+      var(--ink-2);
+    border:1px solid var(--line);border-radius:18px;
+    padding:clamp(2rem,5vw,3.5rem);
+    position:relative;overflow:hidden;
+  }
+  .noir .case-label{
+    font-family:var(--mono);font-size:.68rem;letter-spacing:.3em;
+    text-transform:uppercase;color:var(--st-3);margin-bottom:1.2rem;display:block;
+  }
+  .noir h2{
+    font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;letter-spacing:-.015em;
+    line-height:1.12;margin-bottom:1rem;
+  }
+  .noir h2 em{
+    font-style:normal;
+    background:linear-gradient(90deg,var(--st-3),var(--st-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .noir p{color:var(--muted);max-width:56ch}
+  .redacted{
+    background:var(--paper);color:var(--paper);border-radius:2px;padding:0 .3em;
+    user-select:none;
+  }
+  .soon-badge{
+    display:inline-flex;align-items:center;gap:.55rem;margin-top:1.8rem;
+    font-family:var(--mono);font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;
+    border:1px solid rgba(245,158,11,.4);color:var(--st-3);
+    border-radius:999px;padding:.5rem 1.2rem;
+  }
+  .soon-badge .pulse{
+    width:8px;height:8px;border-radius:50%;background:var(--st-3);
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
+
+  /* ---------- about / footer ---------- */
+  .about{
+    max-width:1100px;margin:0 auto;
+    padding:clamp(3.5rem,9vh,6rem) clamp(1.25rem,4vw,3rem);
+    border-top:1px solid var(--line);
+  }
+  .about p{color:var(--muted);max-width:60ch;margin-top:1rem}
+  footer{
+    border-top:1px solid var(--line);
+    padding:2.5rem clamp(1.25rem,4vw,3rem);
+    display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
+    font-size:.82rem;color:var(--muted);
+  }
+  footer a{color:var(--muted);text-decoration:none}
+  footer a:hover{color:var(--paper)}
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a class="wordmark" href="#top"><b>Closetpassion</b> S.A.</a>
+  <nav aria-label="Principal">
+    <div class="nav-links">
+      <a href="#fonsar">Fonsar</a>
+      <a href="#betweenus">Between Us</a>
+      <a href="#sobre"><span class="pt">Sobre</span><span class="en">About</span></a>
+    </div>
+    <button class="lang-switch" id="langBtn" aria-label="Switch language">EN</button>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-grid">
+      <div>
+        <span class="eyebrow">Lisboa, Portugal</span>
+        <h1 class="pt">Construímos e relançamos <span class="g-st">jogos</span> e <span class="g-tc">software</span> com futuro.</h1>
+        <h1 class="en">We build and relaunch <span class="g-st">games</span> and <span class="g-tc">software</span> with a future.</h1>
+        <p class="pt">A Closetpassion S.A. é uma editora independente portuguesa que adquire, desenvolve e dá nova vida a produtos digitais — jogos e media sob a marca Fonsar Studio, tecnologia e SaaS sob a marca Fonsar Tech.</p>
+        <p class="en">Closetpassion S.A. is an independent Portuguese publisher that acquires, develops and revives digital products — games and media under the Fonsar Studio brand, technology and SaaS under Fonsar Tech.</p>
+      </div>
+      <figure class="mascot-panel">
+        <video autoplay muted loop playsinline poster="assets/fonsar-mascot.jpg" aria-label="Mascote Fonsar">
+          <source src="assets/fonsar-mascot.mp4" type="video/mp4">
+          <img src="assets/fonsar-mascot.jpg" alt="Mascote Fonsar — robô branco e verde-menta a acenar">
+        </video>
+        <figcaption class="mascot-caption"><span class="pt">Fonsar — a nossa mascote</span><span class="en">Fonsar — our mascot</span></figcaption>
+      </figure>
+    </div>
+    <div class="thread" aria-hidden="true"></div>
+  </div>
+
+  <!-- BRANDS -->
+  <div class="brands">
+    <article class="brand-card studio">
+      <span class="brand-tag"><span class="pt">Jogos &amp; Media</span><span class="en">Games &amp; Media</span></span>
+      <h2>Fonsar Studio</h2>
+      <p class="pt">Histórias interativas, jogos mobile e conteúdos que merecem uma segunda vida — e um segundo episódio.</p>
+      <p class="en">Interactive stories, mobile games and media that deserve a second life — and a second episode.</p>
+    </article>
+    <article class="brand-card tech">
+      <span class="brand-tag">AI &amp; SaaS</span>
+      <h2>FONSAR TECH</h2>
+      <p class="pt">Ferramentas de software, produtos de IA e infraestrutura aberta, construídos com foco em privacidade e independência.</p>
+      <p class="en">Software tools, AI products and open infrastructure, built with a focus on privacy and independence.</p>
+    </article>
+  </div>
+
+  <!-- FONSAR -->
+  <section class="product" id="fonsar">
+    <div class="product-grid">
+      <div>
+        <span class="eyebrow">Fonsar Tech</span>
+        <h2>Fonsar Browser</h2>
+        <p class="lead pt">Um browser Android leve e focado em privacidade, de código aberto (MPL-2.0). Navegação sem rasto, sem distrações e sob o teu controlo.</p>
+        <p class="lead en">A lightweight, privacy-focused Android browser, open source under MPL-2.0. Browsing with no tracking, no clutter, and fully under your control.</p>
+        <ul class="feature-list">
+          <li><span class="pt">Bloqueio de rastreadores e navegação privada por omissão</span><span class="en">Tracker blocking and private browsing by default</span></li>
+          <li><span class="pt">App Lock com PIN encriptado no dispositivo</span><span class="en">App Lock with a PIN encrypted on-device</span></li>
+          <li><span class="pt">Tradução de páginas integrada</span><span class="en">Built-in page translation</span></li>
+          <li><span class="pt">Código aberto, auditável por qualquer pessoa</span><span class="en">Open source, auditable by anyone</span></li>
+        </ul>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="https://github.com/Closetpassion2025/fonsar-browser" rel="noopener">GitHub</a>
+          <!-- TODO: substituir pelo URL real da política de privacidade no GitHub Pages -->
+          <a class="btn btn-ghost" href="#"><span class="pt">Política de privacidade</span><span class="en">Privacy policy</span></a>
+          <span class="badge"><span class="pt">Google Play — em breve</span><span class="en">Google Play — coming soon</span></span>
+        </div>
+      </div>
+      <div class="browser-mock" aria-hidden="true">
+        <div class="browser-bar">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <span class="urlbar"><span class="lock">&#128274;</span> fonsar://private</span>
+        </div>
+        <div class="browser-body">
+          <div class="skeleton w60"></div>
+          <div class="skeleton w80"></div>
+          <div class="skeleton"></div>
+          <div class="skeleton w40"></div>
+          <div class="shield-row">&#9679; 0 trackers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BETWEEN US — TEASER -->
+  <section class="product" id="betweenus">
+    <div class="noir">
+      <span class="case-label"><span class="pt">Dossier Fonsar Studio · Caso n.º 001</span><span class="en">Fonsar Studio file · Case no. 001</span></span>
+      <h2 class="pt">Between Us: <em>Detective Story</em> está a chegar.</h2>
+      <h2 class="en">Between Us: <em>Detective Story</em> is coming.</h2>
+      <p class="pt">Um mistério noir interativo onde cada escolha aproxima — ou afasta — Max da verdade. O caso reabre <span class="redacted">brevemente</span> sob a chancela Fonsar Studio.</p>
+      <p class="en">An interactive noir mystery where every choice brings Max closer to the truth — or further from it. The case reopens <span class="redacted">soon</span> under the Fonsar Studio label.</p>
+      <span class="soon-badge"><span class="pulse" aria-hidden="true"></span><span class="pt">Brevemente</span><span class="en">Coming soon</span></span>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about" id="sobre">
+    <span class="eyebrow"><span class="pt">Sobre nós</span><span class="en">About us</span></span>
+    <h2 class="pt" style="font-size:clamp(1.6rem,3.4vw,2.3rem);font-weight:800;letter-spacing:-.015em">Uma editora com duas casas.</h2>
+    <h2 class="en" style="font-size:clamp(1.6rem,3.4vw,2.3rem);font-weight:800;letter-spacing:-.015em">One publisher, two houses.</h2>
+    <p class="pt">Sediada na região de Lisboa, a Closetpassion S.A. combina desenvolvimento próprio com a aquisição de produtos digitais promissores. Acreditamos em software aberto, em privacidade como padrão e em boas histórias que merecem continuar.</p>
+    <p class="en">Based in the Lisbon area, Closetpassion S.A. combines in-house development with the acquisition of promising digital products. We believe in open software, privacy by default, and good stories that deserve to continue.</p>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 Closetpassion S.A. · Lisboa, Portugal</span>
+  <span>
+    <a href="mailto:geral@closetpassion.pt">geral@closetpassion.pt</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/Closetpassion2025" rel="noopener">GitHub</a>
+  </span>
+</footer>
+
+<script>
+  var btn = document.getElementById('langBtn');
+  function setLang(en){
+    document.body.classList.toggle('lang-en', en);
+    document.documentElement.lang = en ? 'en' : 'pt';
+    btn.textContent = en ? 'PT' : 'EN';
+  }
+  btn.addEventListener('click', function(){
+    setLang(!document.body.classList.contains('lang-en'));
+  });
+  /* deteção simples do idioma do browser (default: PT) */
+  if (navigator.language && navigator.language.slice(0,2) !== 'pt') setLang(true);
+
+  /* respeitar prefers-reduced-motion no vídeo da mascote */
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('video[autoplay]').forEach(function(v){
+      v.removeAttribute('autoplay'); v.pause();
+    });
+  }
+</script>
+
+</body>
+</html>
