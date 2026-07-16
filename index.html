@@ -286,6 +286,39 @@
   }
   @keyframes pulse{0%,100%{opacity:.35}50%{opacity:1}}
 
+  .noir-actions{display:flex;flex-wrap:wrap;align-items:center;gap:1rem;margin-top:1.8rem}
+  .btn-trailer{
+    display:inline-flex;align-items:center;gap:.6rem;
+    font-family:var(--display);font-weight:700;font-size:.9rem;
+    color:var(--ink);background:linear-gradient(90deg,var(--st-2),var(--st-3));
+    border:none;border-radius:10px;padding:.7rem 1.4rem;cursor:pointer;
+    transition:transform .15s;
+  }
+  .btn-trailer:hover{transform:translateY(-1px)}
+  .btn-trailer svg{width:16px;height:16px;flex:0 0 16px}
+
+  /* trailer modal */
+  .trailer-modal{
+    position:fixed;inset:0;z-index:100;display:none;
+    align-items:center;justify-content:center;
+    background:rgba(6,6,10,.88);backdrop-filter:blur(6px);
+    padding:1.5rem;
+  }
+  .trailer-modal.open{display:flex}
+  .trailer-modal .frame{
+    width:100%;max-width:960px;position:relative;
+    border-radius:14px;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.6);
+    background:#000;
+  }
+  .trailer-modal video{display:block;width:100%;height:auto;max-height:80vh}
+  .trailer-close{
+    position:absolute;top:-2.75rem;right:0;
+    font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;
+    color:var(--paper);background:transparent;border:1px solid var(--line);
+    border-radius:8px;padding:.4rem .8rem;cursor:pointer;
+  }
+  .trailer-close:hover{border-color:var(--muted)}
+
   /* ---------- about / footer ---------- */
   .about{
     max-width:1100px;margin:0 auto;
@@ -339,7 +372,7 @@
           <source src="assets/fonsar-mascot.mp4" type="video/mp4">
           <img src="assets/fonsar-mascot.jpg" alt="Mascote Fonsar — robô branco e verde-menta a acenar">
         </video>
-        <figcaption class="mascot-caption"><span class="pt">Fonsar — a nossa mascote</span><span class="en">Fonsar — our mascot</span></figcaption>
+        <figcaption class="mascot-caption">Fonsar</figcaption>
       </figure>
     </div>
     <div class="thread" aria-hidden="true"></div>
@@ -414,7 +447,13 @@
       </div>
       <p class="pt">Um mistério noir interativo onde cada escolha aproxima — ou afasta — Max da verdade. O caso reabre <span class="redacted">brevemente</span> sob a chancela Fonsar Studio.</p>
       <p class="en">An interactive noir mystery where every choice brings Max closer to the truth — or further from it. The case reopens <span class="redacted">soon</span> under the Fonsar Studio label.</p>
-      <span class="soon-badge"><span class="pulse" aria-hidden="true"></span><span class="pt">Brevemente</span><span class="en">Coming soon</span></span>
+      <div class="noir-actions">
+        <span class="soon-badge"><span class="pulse" aria-hidden="true"></span><span class="pt">Brevemente</span><span class="en">Coming soon</span></span>
+        <button class="btn-trailer" id="trailerBtn" type="button">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          <span class="pt">Ver trailer</span><span class="en">Watch trailer</span>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -426,6 +465,19 @@
     <p class="pt">Sediada na região de Lisboa, a Closetpassion combina desenvolvimento próprio com a aquisição de produtos digitais promissores. Acreditamos em software aberto, em privacidade como padrão e em boas histórias que merecem continuar.</p>
     <p class="en">Based in the Lisbon area, Closetpassion combines in-house development with the acquisition of promising digital products. We believe in open software, privacy by default, and good stories that deserve to continue.</p>
   </section>
+
+
+  <!-- TRAILER MODAL -->
+  <div class="trailer-modal" id="trailerModal" role="dialog" aria-modal="true" aria-label="Between Us trailer">
+    <div class="frame">
+      <button class="trailer-close" id="trailerCloseBtn" type="button">
+        <span class="pt">Fechar ✕</span><span class="en">Close ✕</span>
+      </button>
+      <video id="trailerVideo" controls playsinline poster="assets/betweenus-poster.jpg" preload="none">
+        <source src="assets/betweenus-trailer.mp4" type="video/mp4">
+      </video>
+    </div>
+  </div>
 
 </main>
 
@@ -450,6 +502,26 @@
   });
   /* deteção simples do idioma do browser (default: PT) */
   if (navigator.language && navigator.language.slice(0,2) !== 'pt') setLang(true);
+
+  /* modal do trailer */
+  var trailerModal = document.getElementById('trailerModal');
+  var trailerVideo = document.getElementById('trailerVideo');
+  function openTrailer(){
+    trailerModal.classList.add('open');
+    trailerVideo.play().catch(function(){});
+  }
+  function closeTrailer(){
+    trailerModal.classList.remove('open');
+    trailerVideo.pause();
+  }
+  document.getElementById('trailerBtn').addEventListener('click', openTrailer);
+  document.getElementById('trailerCloseBtn').addEventListener('click', closeTrailer);
+  trailerModal.addEventListener('click', function(e){
+    if (e.target === trailerModal) closeTrailer();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && trailerModal.classList.contains('open')) closeTrailer();
+  });
 
   /* respeitar prefers-reduced-motion no vídeo da mascote */
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
